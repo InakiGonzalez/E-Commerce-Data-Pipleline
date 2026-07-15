@@ -5,3 +5,10 @@
 
 -- HINT: 
 -- All orders should have a delivered status and the actual delivery date should be not null. 
+SELECT oc.customer_state as customer_state, SUM(oop.payment_value) as Revenue
+FROM olist_customers oc JOIN olist_orders oo ON oc.customer_id = oo.customer_id
+JOIN olist_order_payments oop ON oop.order_id = oo.order_id 
+WHERE oo.order_status = 'delivered' AND oo.order_delivered_customer_date IS NOT NULL
+GROUP BY customer_state
+ORDER BY Revenue DESC
+LIMIT 10;
