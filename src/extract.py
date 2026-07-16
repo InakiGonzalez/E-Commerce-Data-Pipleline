@@ -17,7 +17,6 @@ def get_public_holidays(public_holidays_url: str, year: str) -> DataFrame:
     Returns:
         DataFrame: A dataframe with the public holidays.
     """
-    # TODO: Implement this function.
     try:
         response = requests.get(f"{public_holidays_url}/{year}/BR")
         response.raise_for_status()
@@ -25,7 +24,7 @@ def get_public_holidays(public_holidays_url: str, year: str) -> DataFrame:
         raise SystemExit(f"Request failed with status code {response.status_code}")
 
     holiday_df = DataFrame(response.json())
-    holiday_df.drop(columns=["types","counties"], inplace=True)
+    holiday_df.drop(columns=["types", "counties"], inplace=True)
     holiday_df["date"] = to_datetime(holiday_df["date"])
 
     return holiday_df

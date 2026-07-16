@@ -1,4 +1,5 @@
 import matplotlib
+import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
 
 import plotly.express as px
@@ -181,7 +182,11 @@ def plot_freight_value_weight_relationship(df: DataFrame):
     """
     # TODO: plot freight value weight relationship using seaborn scatterplot.
     # Your x-axis should be weight and, y-axis freight value.
-    raise NotImplementedError
+    sns.scatterplot(data=df, x="product_weight_g", y="freight_value")
+    plt.xlabel("Product Weight (Grams)")
+    plt.ylabel("Freight Value")
+    plt.title("Freight Value Relationship With Product Weight")
+    plt.show()
 
 
 def plot_delivery_date_difference(df: DataFrame):
@@ -201,7 +206,23 @@ def plot_order_amount_per_day_with_holidays(df: DataFrame):
     Args:
         df (DataFrame): Dataframe with order amount per day with holidays query result
     """
-    # TODO: plot order amount per day with holidays using matplotlib.
-    # Mark holidays with vertical lines.
-    # Hint: use plt.axvline.
-    raise NotImplementedError
+    _, ax = plt.subplots(figsize=(14, 6))
+
+    sns.lineplot(data=df, x="date", y="order_count", color="steelblue", ax=ax).set(
+        title="Amount of orders per day with holidays"
+    )
+    ax.set_xlabel("Date")
+    ax.set_ylabel("Order Amount")
+
+    for row in df.itertuples():
+        if row.holiday:
+            ax.axvline(x=row.date, color="red", linestyle="--", linewidth=1)
+
+    # lineplot puts real dates on the x-axis now (unlike barplot's categorical
+    # positions), so a date locator/formatter handles "year-month, every 2
+    # months" natively instead of computing row positions by hand.
+    ax.xaxis.set_major_locator(mdates.MonthLocator(interval=2))
+    ax.xaxis.set_major_formatter(mdates.DateFormatter("%Y-%m"))
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.show()

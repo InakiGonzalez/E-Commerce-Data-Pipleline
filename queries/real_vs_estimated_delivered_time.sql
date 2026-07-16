@@ -1,4 +1,3 @@
--- TODO: 
 -- This query will return a table with the differences between the real 
 -- and estimated delivery times by month and year. 
 -- It will have different columns: 

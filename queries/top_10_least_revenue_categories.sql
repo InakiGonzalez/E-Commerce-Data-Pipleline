@@ -1,4 +1,3 @@
--- TODO: 
 -- This query will return a table with the top 10 least revenue categories 
 -- in English, the number of orders and their total revenue. 
 -- It will have different columns: 

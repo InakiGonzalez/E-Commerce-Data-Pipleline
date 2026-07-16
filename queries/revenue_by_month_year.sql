@@ -1,4 +1,3 @@
--- TODO: 
 -- This query will return a table with the revenue by month and year. 
 -- It will have different columns: 
 --      month_no, with the month numbers going from 01 to 12; 

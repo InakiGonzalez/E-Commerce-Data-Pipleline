@@ -1,5 +1,4 @@
-
--- TODO: 
+ 
 -- This query will return a table with two columns: State and Delivery_Difference. 
 -- The first one will have the letters that identify the states, 
 -- and the second one the average difference between the estimated delivery date 
